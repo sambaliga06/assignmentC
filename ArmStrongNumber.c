@@ -11,7 +11,7 @@ int main(){
     }
     printf("sum = %d \n",sum);
     if(sum==num){
-        printf("Astronomical number \n");
+        printf("Armstrong number \n");
     }
     else
     printf("Some number");
