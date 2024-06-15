@@ -1,62 +1,74 @@
+// Online C compiler to run C program online
 #include <stdio.h>
 #include <stdlib.h>
 
-struct Node {
+typedef struct node{
     int data;
-    struct Node* next;
-};
+    struct node *next;
+}NODEPTR;
+NODEPTR *start=NULL,*tptr,*shadow ,*newnode;
 
-
-struct Node* createNode(int data) {
-    struct Node* newNode = (struct Node*) malloc(sizeof(struct Node));
-    newNode->data = data;
-    newNode->next = NULL;
-    return newNode;
-}
-
-void insertAtBeginning(struct Node** head, int data) {
-    struct Node* newNode = createNode(data);
-    newNode->next = *head;
-    *head = newNode;
-}
-
-void printList(struct Node* node) {
-    while (node != NULL) {
-        printf("%d -> ", node->data);
-        node = node->next;
+void insertList(int num){
+    newnode=(NODEPTR*)malloc(sizeof(NODEPTR));
+    newnode->data=num;
+    newnode->next=NULL;
+    for(tptr=start;tptr;shadow=tptr,tptr=tptr->next);
+    
+    if(start==tptr){
+        newnode->next = start;
+        start=newnode;
+        
+    }else
+    {
+        newnode->next=shadow->next;
+        shadow->next=newnode;
     }
-    printf("NULL\n");
+}
+void displayList(){
+    for(tptr=start;tptr;tptr=tptr->next)
+    printf("%d ",tptr->data);
 }
 
-void deleteAtBeginning(struct Node** head) {
-    if (*head == NULL) {
+int searchList(int num){
+    int i=0;
+    for(tptr=start;tptr;tptr=tptr->next)
+    {
+        if(tptr->data==num)
+            return i;
+        i++;
+    }
+    return -1;
+}
+void deleteListfromFront(){
+     if (start == NULL) {
         printf("List is already empty.\n");
         return;
     }
 
-    struct Node* temp = *head; // Store the head node
-    *head = (*head)->next;     // Change head to the next node
-    free(temp);                // Free old head
+    tptr = start; 
+    start = start->next;     
+    free(tptr);               
 }
-
+void deleteFromPos(int pos){
+    int i=0;
+    
+    while(i!=pos&&tptr)
+}
 
 int main() {
-    struct Node* head = NULL;
-    
-  int choice,num;
-while(1){
-printf("1. Enter to create node \n2. Enter to Delete node ");
-scanf(switch){
-case 1:
-  printf("Enter the element \n");
-  scanf("%d",&num);
-  insertAtBeginning(&head,num);
-break;
-case 2:
-    deleteAtBeginning(&head);
-break;
-}
-    printList(head);
+    // Write C code here
+    int num;
 
+    for(int i=0;i<4;i++){
+        scanf("%d",&num);
+        insertList(num);
+    }
+    displayList();
+    
+    int search = searchList(9);
+    printf("\nPosition = %d\n",search);
+    
+    deleteList();
+    displayList();
     return 0;
 }
